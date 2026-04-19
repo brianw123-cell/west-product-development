@@ -155,6 +155,11 @@
     .project-link.inactive { color: var(--text-muted); pointer-events: none; font-weight: 400; }
     .project-link.inactive::after { content: ""; }
 
+    .project-image { margin: -14px -14px 14px; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px 12px 0 0; background: #f4f1ec; border-bottom: 1px solid var(--border); }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-image.contain img { object-fit: contain; padding: 12px; }
+    .project-image.placeholder { display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-align: center; padding: 0 16px; background: repeating-linear-gradient(45deg, #e9e5df, #e9e5df 10px, #f0ede8 10px, #f0ede8 20px); }
+
     #contact { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px; }
     .contact-heading { flex-shrink: 0; }
     .contact-heading .section-title { margin-bottom: 0; }
@@ -315,6 +320,7 @@
     <h2 class="section-title">Featured work</h2>
     <div class="projects-grid">
       <div class="project-card featured">
+        <div class="project-image placeholder">Proposal ecosystem screenshot goes here</div>
         <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Digital Proposal Ecosystem</h3><span class="badge badge-featured">Featured</span></div>
         <ul class="project-bullets">
           <li>Mapped a 30-step sales and bidding lifecycle, identifying data bottlenecks for a streamlined digital replacement.</li>
@@ -323,15 +329,17 @@
           <li>Delivered full implementation training and a versioned Workflow Guide for long-term team adoption.</li>
         </ul>
         <div class="stack"><span class="stack-pill">Google Sheets</span><span class="stack-pill">Apps Script</span><span class="stack-pill">AppSheet</span><span class="stack-pill">DocuSign</span><span class="stack-pill">HTML/CSS/JS</span></div>
-        <a href="#" class="project-link">View case study</a>
+        <span class="project-link inactive">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
       </div>
       <div class="project-card featured">
+        <div class="project-image placeholder">Field Ops dashboard screenshot goes here</div>
         <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3><span class="badge badge-featured">Featured</span></div>
         <p>Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
         <div class="stack"><span class="stack-pill">Next.js</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Tailwind CSS</span><span class="stack-pill">Supabase</span><span class="stack-pill">Role-based access</span></div>
-        <a href="#" class="project-link">View case study</a>
+        <span class="project-link inactive">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
       </div>
       <div class="project-card">
+        <div class="project-image placeholder contain">AI Mastery infographic goes here</div>
         <div class="project-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge badge-training">Training</span></div>
         <p>Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA. Practical curriculum focused on applying AI tools to real operational workflows &mdash; from proposal generation to project management.</p>
         <div class="stack"><span class="stack-pill">AI Tools</span><span class="stack-pill">Workflow Automation</span><span class="stack-pill">Solar Industry</span><span class="stack-pill">Team Training</span></div>
