@@ -8,7 +8,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #f0ede8; --bg-alt: #e9e5df; --bg-card: #f7f4f0
+      --bg: #f0ede8; --bg-alt: #e9e5df; --bg-card: #f7f4f0;
       --navy: #1e2d42; --slate: #8fa8be; --text: #2a2a2a;
       --text-mid: #4a4a4a; --text-muted: #787878; --border: #d4cfc9; --accent: #4a7fa5;
     }
@@ -42,7 +42,7 @@
 
     .hero {
       background: linear-gradient(170deg, #141e2b 0%, #1a2a3e 30%, #1f3248 60%, #243a52 100%);
-      padding: 48px 8% 72px;
+      padding: 34px 8% 50px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -57,18 +57,18 @@
       background: radial-gradient(circle, rgba(143,168,190,0.05) 0%, transparent 65%);
       pointer-events: none;
     }
-    .hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; margin-top: 40px; flex-wrap: wrap; }
+    .hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; margin-top: 28px; flex-wrap: wrap; }
     .hero-left { flex: 1; }
     .hero-eyebrow {
       font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(143,168,190,0.55); margin-bottom: 24px;
+      color: rgba(143,168,190,0.55); margin-bottom: 17px;
       animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
       animation-delay: 0.1s;
     }
     .hero h1 {
       font-family: "Geist", sans-serif;
       font-size: clamp(44px, 5.8vw, 64px); font-weight: 600;
-      color: rgba(245,243,239,0.95); line-height: 1.06; margin-bottom: 28px;
+      color: rgba(245,243,239,0.95); line-height: 1.06; margin-bottom: 20px;
       letter-spacing: -0.015em;
       animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
       animation-delay: 0.2s;
@@ -246,7 +246,7 @@
   <section id="about">
     <p class="section-eyebrow">About</p>
     <h2 class="section-title">Who we are</h2>
-    <p class="mission-text">West Product Development brings together deep mechanical engineering expertise and modern software architecture &mdash; auditing legacy workflows and implementing AI-driven tools to accelerate the product development lifecycle for small and mid-size businesses.</p>
+    <p class="mission-text">West Product Development brings together deep mechanical engineering expertise and modern software architecture &mdash; auditing legacy workflows and implementing AI-driven tools to accelerate the product development lifecycle. We focus on <strong>renewable energy, solar, and climate-sector businesses</strong>, where outdated spreadsheets and paper-based processes slow down teams doing work that matters.</p>
     <div class="team-grid">
 
       <div class="team-card">
