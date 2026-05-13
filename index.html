@@ -156,11 +156,27 @@
     .project-link.inactive { color: var(--text-muted); pointer-events: none; font-weight: 400; }
     .project-link.inactive::after { content: ""; }
 
-    .project-image { width: 42%; flex-shrink: 0; align-self: stretch; overflow: hidden; background: #f4f1ec; border-right: 1px solid var(--border); min-height: 240px; }
+    .project-image { width: 42%; flex-shrink: 0; align-self: stretch; overflow: hidden; background: #ecead5; border-right: 1px solid var(--border); min-height: 260px; display: flex; align-items: center; justify-content: center; padding: 16px; }
     .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .project-image.contain { background: #f4f1ec; }
-    .project-image.contain img { object-fit: contain; padding: 14px; }
-    .project-image.placeholder { display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; text-align: center; padding: 0 16px; background: repeating-linear-gradient(45deg, #e9e5df, #e9e5df 10px, #f0ede8 10px, #f0ede8 20px); }
+    .project-image.contain { background: #f4f1ec; padding: 0; }
+    .project-image.contain img { object-fit: contain; padding: 14px; width: 100%; height: 100%; }
+
+    /* Phone frame for mobile screenshots */
+    .phone-frame { width: 168px; aspect-ratio: 9 / 19; border: 8px solid #1a1a1a; border-radius: 24px; overflow: hidden; background: #000; position: relative; box-shadow: 0 6px 22px rgba(30,45,66,0.18); flex-shrink: 0; }
+    .phone-frame::before { content: ""; position: absolute; top: 4px; left: 50%; transform: translateX(-50%); width: 52px; height: 5px; background: #1a1a1a; border-radius: 0 0 8px 8px; z-index: 2; }
+    .phone-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .phone-frame .placeholder-fill { width: 100%; height: 100%; background: repeating-linear-gradient(45deg, #cdd5db, #cdd5db 8px, #dde4e9 8px, #dde4e9 16px); display: flex; align-items: center; justify-content: center; color: #4a5a6a; font-size: 11px; font-weight: 500; text-align: center; padding: 8px; line-height: 1.4; }
+
+    /* Browser chrome for desktop screenshots */
+    .browser-frame { width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cdc8c2; box-shadow: 0 6px 22px rgba(30,45,66,0.12); background: #fff; }
+    .browser-chrome { background: linear-gradient(180deg, #e8e4de, #ddd8d1); padding: 6px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #c8c2bb; }
+    .browser-dots { display: flex; gap: 4px; }
+    .browser-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .browser-dot.r { background: #ff5f56; }
+    .browser-dot.y { background: #ffbd2e; }
+    .browser-dot.g { background: #27c93f; }
+    .browser-url { flex: 1; background: #fff; border-radius: 4px; padding: 3px 9px; font-size: 10px; color: var(--text-muted); text-align: center; }
+    .browser-frame img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: top; display: block; }
 
     #contact { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px; }
     .contact-heading { flex-shrink: 0; }
@@ -195,7 +211,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
       .project-card { flex-direction: column; }
-      .project-image { width: 100%; border-right: none; border-bottom: 1px solid var(--border); aspect-ratio: 16 / 9; min-height: auto; }
+      .project-image { width: 100%; border-right: none; border-bottom: 1px solid var(--border); aspect-ratio: auto; min-height: auto; padding: 16px; }
       .contact-grid { flex-direction: column; }
       footer { flex-direction: column; text-align: center; align-items: center; gap: 12px; }
       .hero-nav-links { gap: 20px; }
@@ -324,7 +340,11 @@
     <h2 class="section-title">Featured work</h2>
     <div class="projects-grid">
       <div class="project-card featured">
-        <div class="project-image placeholder">Proposal ecosystem screenshot goes here</div>
+        <div class="project-image">
+          <div class="phone-frame">
+            <div class="placeholder-fill">Personalized Proposal app screenshot goes here<br>(proposal-mobile.png)</div>
+          </div>
+        </div>
         <div class="project-content">
           <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Digital Proposal Ecosystem</h3><span class="badge badge-featured">Featured</span></div>
           <ul class="project-bullets">
@@ -338,7 +358,15 @@
         </div>
       </div>
       <div class="project-card featured">
-        <div class="project-image placeholder">Field Ops dashboard screenshot goes here</div>
+        <div class="project-image">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+              <div class="browser-url">amysrs.app/admin/dashboard</div>
+            </div>
+            <img src="field-ops-dashboard.png" alt="Amy's Roofing &amp; Solar Field Operations admin dashboard">
+          </div>
+        </div>
         <div class="project-content">
           <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3><span class="badge badge-featured">Featured</span></div>
           <p>Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
@@ -357,7 +385,15 @@
         </div>
       </div>
       <div class="project-card">
-        <div class="project-image placeholder">SCTCA dashboard screenshot goes here</div>
+        <div class="project-image">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+              <div class="browser-url">sctca-tracker.org/dashboard</div>
+            </div>
+            <img src="sctca-dashboard.png" alt="Sonoma County Transportation and Climate Authorities Climate Action Tracker">
+          </div>
+        </div>
         <div class="project-content">
           <div class="project-top"><h3>Sonoma County Transportation and Climate Authorities</h3><span class="badge badge-wip">Pilot phase</span></div>
           <ul class="project-bullets">
