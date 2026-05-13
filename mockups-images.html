@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Treatment Options — Pick A, B, or C</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f0ede8; --bg-alt: #e9e5df; --bg-card: #f7f4f0;
+      --navy: #1e2d42; --slate: #8fa8be; --text: #2a2a2a;
+      --text-mid: #4a4a4a; --text-muted: #787878; --border: #d4cfc9; --accent: #4a7fa5;
+    }
+    body { font-family: "Geist", "DM Sans", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px; }
+    .wrapper { max-width: 1100px; margin: 0 auto; padding: 36px 5% 80px; }
+    h1 { font-size: 30px; font-weight: 600; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.02em; }
+    .intro { font-size: 15px; color: var(--text-mid); margin-bottom: 32px; max-width: 800px; }
+    .section { margin-bottom: 56px; }
+    .section-label { font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .section-title { font-size: 24px; font-weight: 600; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .section-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 18px; max-width: 800px; }
+
+    /* shared card pieces */
+    .card-list { display: grid; gap: 12px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .card.featured { border-color: var(--accent); border-width: 1.5px; }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+    .card-top h3 { font-size: 17px; font-weight: 500; color: var(--navy); line-height: 1.4; }
+    .badge { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; background: var(--navy); color: var(--slate); }
+    .badge.training { background: #e8f0e8; color: #2e5230; }
+    .badge.wip { background: #f4ede0; color: #7a5230; }
+    .card-desc { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+    .pill { font-size: 12px; color: #3a5a6e; background: #e4eef5; padding: 3px 9px; border-radius: 10px; }
+    .loc { font-size: 13px; color: var(--text-muted); }
+
+    /* striped placeholder content */
+    .stripe-bg { background: repeating-linear-gradient(45deg, #cdd5db, #cdd5db 8px, #dde4e9 8px, #dde4e9 16px); display: flex; align-items: center; justify-content: center; color: #4a5a6a; font-size: 11px; font-weight: 600; text-align: center; padding: 8px; }
+
+    /* ============ OPTION A: device frames ============ */
+    .a-card { display: flex; }
+    .a-image-slot { width: 42%; flex-shrink: 0; align-self: stretch; background: #ecead5; border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 16px; min-height: 280px; }
+    .a-content { flex: 1; padding: 14px; display: flex; flex-direction: column; min-width: 0; }
+
+    .phone-frame {
+      width: 170px;
+      aspect-ratio: 9 / 19;
+      border: 8px solid #1a1a1a;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      box-shadow: 0 6px 22px rgba(30,45,66,0.18);
+    }
+    .phone-frame::before {
+      content: ""; position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      width: 52px; height: 5px; background: #1a1a1a; border-radius: 0 0 8px 8px; z-index: 2;
+    }
+    .phone-frame .stripe-bg { width: 100%; height: 100%; font-size: 10px; line-height: 1.3; padding: 4px; }
+
+    .browser-frame {
+      width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cdc8c2;
+      box-shadow: 0 6px 22px rgba(30,45,66,0.12); background: #fff;
+    }
+    .browser-chrome { background: linear-gradient(180deg, #e8e4de, #ddd8d1); padding: 6px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #c8c2bb; }
+    .browser-dots { display: flex; gap: 4px; }
+    .browser-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .browser-dot.r { background: #ff5f56; } .browser-dot.y { background: #ffbd2e; } .browser-dot.g { background: #27c93f; }
+    .browser-url { flex: 1; background: #fff; border-radius: 4px; padding: 3px 9px; font-size: 10px; color: var(--text-muted); text-align: center; }
+    .browser-frame .stripe-bg { width: 100%; aspect-ratio: 16 / 9; }
+
+    .a-infographic-img { max-width: 100%; max-height: 260px; object-fit: contain; display: block; }
+
+    /* ============ OPTION B: top banner ============ */
+    .b-card { display: flex; flex-direction: column; }
+    .b-banner-wide { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #ecead5; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+    .b-banner-wide .stripe-bg { width: 100%; height: 100%; font-size: 12px; }
+    .b-banner-wide.contain { padding: 12px; }
+    .b-banner-wide.contain img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .b-banner-mobile { width: 100%; aspect-ratio: 16 / 9; background: #ecead5; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); }
+    .mini-phone {
+      width: 95px; aspect-ratio: 9 / 19;
+      border: 6px solid #1a1a1a; border-radius: 16px;
+      overflow: hidden; background: #000;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    }
+    .mini-phone::before { content: ""; position: absolute; top: 3px; left: 50%; transform: translateX(-50%); width: 32px; height: 3px; background: #1a1a1a; border-radius: 0 0 5px 5px; z-index: 2; }
+    .mini-phone .stripe-bg { width: 100%; height: 100%; font-size: 8px; padding: 2px; }
+    .b-content { padding: 14px; display: flex; flex-direction: column; }
+
+    /* ============ OPTION C: contain everywhere ============ */
+    .c-card { display: flex; }
+    .c-image-slot { width: 42%; flex-shrink: 0; align-self: stretch; background: #ecead5; border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 14px; min-height: 280px; }
+    .c-content { flex: 1; padding: 14px; display: flex; flex-direction: column; min-width: 0; }
+    .c-mobile-stripe { height: 100%; aspect-ratio: 9 / 19; max-height: 250px; }
+    .c-desktop-stripe { width: 100%; max-width: 360px; aspect-ratio: 16 / 9; }
+    .c-image-slot img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+    /* pros/cons + footer */
+    .pros-cons { font-size: 13px; color: var(--text-mid); margin-top: 14px; padding-left: 14px; border-left: 2px solid var(--slate); max-width: 800px; }
+    .pros-cons strong { color: var(--navy); }
+    .footer-note { margin-top: 56px; padding: 22px; background: var(--bg-alt); border-radius: 8px; font-size: 14px; color: var(--text-mid); max-width: 800px; line-height: 1.75; }
+    .footer-note strong { color: var(--navy); }
+    .footer-note code { background: #fff; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <h1>Image treatment &mdash; pick A, B, or C</h1>
+  <p class="intro">Same four project cards rendered three different ways. Compare how each option handles the mobile screenshot (which is the trickiest fit), the two desktop dashboards, and the AI infographic.</p>
+
+  <!-- ============ OPTION A ============ -->
+  <div class="section">
+    <p class="section-label">Option A</p>
+    <h2 class="section-title">Device frames (recommended)</h2>
+    <p class="section-desc">Mobile screenshot inside a phone bezel. Desktop screenshots inside a browser chrome (with traffic-light dots + URL bar). AI infographic plain. Each medium reads honestly &mdash; the form-factor mismatch becomes an intentional design choice.</p>
+
+    <div class="card-list">
+
+      <!-- Mobile -->
+      <div class="card featured a-card">
+        <div class="a-image-slot">
+          <div class="phone-frame"><div class="stripe-bg">Amy's R+S<br>Personalized<br>Proposal</div></div>
+        </div>
+        <div class="a-content">
+          <div class="card-top"><h3>Amy&rsquo;s R+S &mdash; Digital Proposal Ecosystem</h3><span class="badge">Featured</span></div>
+          <p class="card-desc">Mobile-first proposal app replacing a 34-tab legacy spreadsheet. Bundled solar/roofing pricing, e-signatures, digital audit trail.</p>
+          <div class="pills"><span class="pill">Google Sheets</span><span class="pill">Apps Script</span><span class="pill">AppSheet</span><span class="pill">DocuSign</span></div>
+          <span class="loc">Petaluma, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Desktop: Field Ops -->
+      <div class="card featured a-card">
+        <div class="a-image-slot">
+          <div class="browser-frame">
+            <div class="browser-chrome"><div class="browser-dots"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div><div class="browser-url">amysrs.app/admin/dashboard</div></div>
+            <div class="stripe-bg">Field Ops admin dashboard</div>
+          </div>
+        </div>
+        <div class="a-content">
+          <div class="card-top"><h3>Amy&rsquo;s R+S &mdash; Field Operations Portal</h3><span class="badge">Featured</span></div>
+          <p class="card-desc">Full-stack field operations web app with mobile photo documentation and a real-time admin command center.</p>
+          <div class="pills"><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind</span><span class="pill">Supabase</span></div>
+          <span class="loc">Petaluma, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Infographic -->
+      <div class="card a-card">
+        <div class="a-image-slot" style="padding: 12px;">
+          <img class="a-infographic-img" src="ai-mastery.png" alt="8 Levels of AI Mastery">
+        </div>
+        <div class="a-content">
+          <div class="card-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge training">Training</span></div>
+          <p class="card-desc">Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA.</p>
+          <div class="pills"><span class="pill">AI Tools</span><span class="pill">Workflow Automation</span><span class="pill">Team Training</span></div>
+          <span class="loc">Novato, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Desktop: SCTCA -->
+      <div class="card a-card">
+        <div class="a-image-slot">
+          <div class="browser-frame">
+            <div class="browser-chrome"><div class="browser-dots"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div><div class="browser-url">sctca-tracker.org/dashboard</div></div>
+            <div class="stripe-bg">SCTCA Climate Action Tracker</div>
+          </div>
+        </div>
+        <div class="a-content">
+          <div class="card-top"><h3>Sonoma County Transportation and Climate Authorities</h3><span class="badge wip">Pilot phase</span></div>
+          <p class="card-desc">Custom data management platform with public-facing climate dashboards and ICLEI ClearPath 2.0 integration.</p>
+          <div class="pills"><span class="pill">Data Platform</span><span class="pill">Public Dashboard</span><span class="pill">Government</span></div>
+          <span class="loc">Sonoma County, CA &middot; 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Most polished. The phone frame makes the mobile screenshot feel intentional, not awkward. Each medium reads honestly. ~30 lines more CSS than the other options.</div>
+  </div>
+
+  <!-- ============ OPTION B ============ -->
+  <div class="section">
+    <p class="section-label">Option B</p>
+    <h2 class="section-title">Top banner (image strip at top of each card)</h2>
+    <p class="section-desc">Revert from V2 side-by-side back to V1 top-banner. Every card gets a 16:9 image strip at the top. Desktop screenshots use object-position: top so the dashboard header shows. Mobile screenshot becomes a small phone thumbnail centered in the 16:9 area.</p>
+
+    <div class="card-list">
+
+      <!-- Mobile -->
+      <div class="card featured b-card">
+        <div class="b-banner-mobile"><div class="mini-phone"><div class="stripe-bg">Mobile</div></div></div>
+        <div class="b-content">
+          <div class="card-top"><h3>Amy&rsquo;s R+S &mdash; Digital Proposal Ecosystem</h3><span class="badge">Featured</span></div>
+          <p class="card-desc">Mobile-first proposal app replacing a 34-tab legacy spreadsheet. Bundled solar/roofing pricing, e-signatures, digital audit trail.</p>
+          <div class="pills"><span class="pill">Google Sheets</span><span class="pill">Apps Script</span><span class="pill">AppSheet</span><span class="pill">DocuSign</span></div>
+          <span class="loc">Petaluma, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Desktop: Field Ops -->
+      <div class="card featured b-card">
+        <div class="b-banner-wide"><div class="stripe-bg">Field Ops admin dashboard (top portion shown via object-position: top)</div></div>
+        <div class="b-content">
+          <div class="card-top"><h3>Amy&rsquo;s R+S &mdash; Field Operations Portal</h3><span class="badge">Featured</span></div>
+          <p class="card-desc">Full-stack field operations web app with mobile photo documentation and a real-time admin command center.</p>
+          <div class="pills"><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind</span><span class="pill">Supabase</span></div>
+          <span class="loc">Petaluma, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Infographic -->
+      <div class="card b-card">
+        <div class="b-banner-wide contain"><img src="ai-mastery.png" alt="8 Levels of AI Mastery"></div>
+        <div class="b-content">
+          <div class="card-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge training">Training</span></div>
+          <p class="card-desc">Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA.</p>
+          <div class="pills"><span class="pill">AI Tools</span><span class="pill">Workflow Automation</span><span class="pill">Team Training</span></div>
+          <span class="loc">Novato, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Desktop: SCTCA -->
+      <div class="card b-card">
+        <div class="b-banner-wide"><div class="stripe-bg">SCTCA Climate Action Tracker (top portion shown)</div></div>
+        <div class="b-content">
+          <div class="card-top"><h3>Sonoma County Transportation and Climate Authorities</h3><span class="badge wip">Pilot phase</span></div>
+          <p class="card-desc">Custom data management platform with public-facing climate dashboards and ICLEI ClearPath 2.0 integration.</p>
+          <div class="pills"><span class="pill">Data Platform</span><span class="pill">Public Dashboard</span><span class="pill">Government</span></div>
+          <span class="loc">Sonoma County, CA &middot; 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Cleanest visual rhythm &mdash; every card stacks the same way, every image is 16:9. But the mobile-app card's tiny phone thumbnail floats in a lot of dead 16:9 space; the "we built a mobile experience" story is muted.</div>
+  </div>
+
+  <!-- ============ OPTION C ============ -->
+  <div class="section">
+    <p class="section-label">Option C</p>
+    <h2 class="section-title">Contain everywhere (keep V2, accept the whitespace)</h2>
+    <p class="section-desc">Keeps the side-by-side V2 layout exactly as it is now. Every image uses object-fit: contain, so nothing crops. The mobile screenshot floats centered in a wide gray rectangle; the desktop screenshots show with letterbox bands top &amp; bottom.</p>
+
+    <div class="card-list">
+
+      <!-- Mobile -->
+      <div class="card featured c-card">
+        <div class="c-image-slot"><div class="stripe-bg c-mobile-stripe">Mobile app<br>(9:19)</div></div>
+        <div class="c-content">
+          <div class="card-top"><h3>Amy&rsquo;s R+S &mdash; Digital Proposal Ecosystem</h3><span class="badge">Featured</span></div>
+          <p class="card-desc">Mobile-first proposal app replacing a 34-tab legacy spreadsheet. Bundled solar/roofing pricing, e-signatures, digital audit trail.</p>
+          <div class="pills"><span class="pill">Google Sheets</span><span class="pill">Apps Script</span><span class="pill">AppSheet</span><span class="pill">DocuSign</span></div>
+          <span class="loc">Petaluma, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Desktop: Field Ops -->
+      <div class="card featured c-card">
+        <div class="c-image-slot"><div class="stripe-bg c-desktop-stripe">Field Ops dashboard (16:9)</div></div>
+        <div class="c-content">
+          <div class="card-top"><h3>Amy&rsquo;s R+S &mdash; Field Operations Portal</h3><span class="badge">Featured</span></div>
+          <p class="card-desc">Full-stack field operations web app with mobile photo documentation and a real-time admin command center.</p>
+          <div class="pills"><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind</span><span class="pill">Supabase</span></div>
+          <span class="loc">Petaluma, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Infographic -->
+      <div class="card c-card">
+        <div class="c-image-slot"><img src="ai-mastery.png" alt="8 Levels of AI Mastery"></div>
+        <div class="c-content">
+          <div class="card-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge training">Training</span></div>
+          <p class="card-desc">Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA.</p>
+          <div class="pills"><span class="pill">AI Tools</span><span class="pill">Workflow Automation</span><span class="pill">Team Training</span></div>
+          <span class="loc">Novato, CA &middot; 2026</span>
+        </div>
+      </div>
+
+      <!-- Desktop: SCTCA -->
+      <div class="card c-card">
+        <div class="c-image-slot"><div class="stripe-bg c-desktop-stripe">SCTCA dashboard (16:9)</div></div>
+        <div class="c-content">
+          <div class="card-top"><h3>Sonoma County Transportation and Climate Authorities</h3><span class="badge wip">Pilot phase</span></div>
+          <p class="card-desc">Custom data management platform with public-facing climate dashboards and ICLEI ClearPath 2.0 integration.</p>
+          <div class="pills"><span class="pill">Data Platform</span><span class="pill">Public Dashboard</span><span class="pill">Government</span></div>
+          <span class="loc">Sonoma County, CA &middot; 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Simplest CSS, every image fully visible without cropping. But the mobile screenshot card looks empty &mdash; the small phone shot floats in a wide gray slot. Desktop shots also show noticeable letterbox bands.</div>
+  </div>
+
+  <div class="footer-note">
+    <strong>To apply your pick:</strong> tell me &ldquo;A&rdquo;, &ldquo;B&rdquo;, or &ldquo;C&rdquo;. I&rsquo;ll wire it into the preview branch with the real screenshots once you drop them in this folder:
+    <br><br>
+    <code>proposal-mobile.png</code> &mdash; the mobile app screenshot you just shared<br>
+    <code>field-ops-dashboard.png</code> &mdash; the Field Ops admin dashboard<br>
+    <code>sctca-dashboard.png</code> &mdash; the SCTCA Climate Action Tracker
+    <br><br>
+    The AI Mastery infographic (<code>ai-mastery.png</code>) is already in the repo.
+  </div>
+
+</div>
+</body>
+</html>
