@@ -114,14 +114,14 @@
     .mission-text { font-size: 18px; font-weight: 300; color: var(--text-mid); line-height: 1.85; max-width: 780px; border-left: 2px solid var(--slate); padding-left: 18px; margin-bottom: 14px; }
 
     .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .team-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+    .team-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; }
     .team-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
     .team-photo { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid var(--border); }
     .team-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .team-name { font-family: "Geist", sans-serif; font-size: 26px; font-weight: 600; color: var(--navy); line-height: 1.2; letter-spacing: -0.01em; }
     .team-title { font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 3px; }
     .team-bio { font-size: 17px; font-weight: 300; color: var(--text-mid); line-height: 1.65; margin-bottom: 8px; }
-    .team-skills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .team-skills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
     .team-skill { font-size: 14px; color: #3a5a6e; background: #e4eef5; padding: 3px 9px; border-radius: 10px; }
     .team-skill.alt { color: #3a4e3a; background: #e4f0e4; }
 
@@ -132,8 +132,9 @@
     .service-card h3 { font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
     .service-card p { font-size: 16px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
 
-    .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
-    .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; transition: border-color 0.2s; }
+    .projects-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 0; display: flex; transition: border-color 0.2s; overflow: hidden; }
+    .project-content { flex: 1; padding: 14px; display: flex; flex-direction: column; min-width: 0; }
     .project-card:hover { border-color: var(--slate); }
     .project-card.featured { border-color: var(--accent); border-width: 1.5px; }
     .project-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
@@ -154,6 +155,28 @@
     .project-link:hover { color: var(--navy); }
     .project-link.inactive { color: var(--text-muted); pointer-events: none; font-weight: 400; }
     .project-link.inactive::after { content: ""; }
+
+    .project-image { width: 42%; flex-shrink: 0; align-self: stretch; overflow: hidden; background: #ecead5; border-right: 1px solid var(--border); min-height: 260px; display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-image.contain { background: #f4f1ec; padding: 0; }
+    .project-image.contain img { object-fit: contain; padding: 14px; width: 100%; height: 100%; }
+
+    /* Phone frame for mobile screenshots */
+    .phone-frame { width: 168px; aspect-ratio: 9 / 19; border: 8px solid #1a1a1a; border-radius: 24px; overflow: hidden; background: #000; position: relative; box-shadow: 0 6px 22px rgba(30,45,66,0.18); flex-shrink: 0; }
+    .phone-frame::before { content: ""; position: absolute; top: 4px; left: 50%; transform: translateX(-50%); width: 52px; height: 5px; background: #1a1a1a; border-radius: 0 0 8px 8px; z-index: 2; }
+    .phone-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .phone-frame .placeholder-fill { width: 100%; height: 100%; background: repeating-linear-gradient(45deg, #cdd5db, #cdd5db 8px, #dde4e9 8px, #dde4e9 16px); display: flex; align-items: center; justify-content: center; color: #4a5a6a; font-size: 11px; font-weight: 500; text-align: center; padding: 8px; line-height: 1.4; }
+
+    /* Browser chrome for desktop screenshots */
+    .browser-frame { width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid #cdc8c2; box-shadow: 0 6px 22px rgba(30,45,66,0.12); background: #fff; }
+    .browser-chrome { background: linear-gradient(180deg, #e8e4de, #ddd8d1); padding: 6px 10px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #c8c2bb; }
+    .browser-dots { display: flex; gap: 4px; }
+    .browser-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .browser-dot.r { background: #ff5f56; }
+    .browser-dot.y { background: #ffbd2e; }
+    .browser-dot.g { background: #27c93f; }
+    .browser-url { flex: 1; background: #fff; border-radius: 4px; padding: 3px 9px; font-size: 10px; color: var(--text-muted); text-align: center; }
+    .browser-frame img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: top; display: block; }
 
     #contact { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px; }
     .contact-heading { flex-shrink: 0; }
@@ -187,6 +210,8 @@
       .team-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
+      .project-card { flex-direction: column; }
+      .project-image { width: 100%; border-right: none; border-bottom: 1px solid var(--border); aspect-ratio: auto; min-height: auto; padding: 16px; }
       .contact-grid { flex-direction: column; }
       footer { flex-direction: column; text-align: center; align-items: center; gap: 12px; }
       .hero-nav-links { gap: 20px; }
@@ -315,39 +340,70 @@
     <h2 class="section-title">Featured work</h2>
     <div class="projects-grid">
       <div class="project-card featured">
-        <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Digital Proposal Ecosystem</h3><span class="badge badge-featured">Featured</span></div>
-        <ul class="project-bullets">
-          <li>Mapped a 30-step sales and bidding lifecycle, identifying data bottlenecks for a streamlined digital replacement.</li>
-          <li>Built a custom sales application replacing a 34-tab legacy spreadsheet, with automated e-signatures and a tamper-evident digital audit trail.</li>
-          <li>Automated proposal ID generation and secure record-keeping for all signed agreements.</li>
-          <li>Delivered full implementation training and a versioned Workflow Guide for long-term team adoption.</li>
-        </ul>
-        <div class="stack"><span class="stack-pill">Google Sheets</span><span class="stack-pill">Apps Script</span><span class="stack-pill">AppSheet</span><span class="stack-pill">DocuSign</span><span class="stack-pill">HTML/CSS/JS</span></div>
-        <a href="#" class="project-link">View case study</a>
+        <div class="project-image">
+          <div class="phone-frame">
+            <img src="proposal-mobile.png" alt="Amy's Roofing &amp; Solar Personalized Proposal mobile app">
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Digital Proposal Ecosystem</h3><span class="badge badge-featured">Featured</span></div>
+          <ul class="project-bullets">
+            <li>Mapped a 30-step sales and bidding lifecycle, identifying data bottlenecks for a streamlined digital replacement.</li>
+            <li>Built a custom sales application replacing a 34-tab legacy spreadsheet, with automated e-signatures and a tamper-evident digital audit trail.</li>
+            <li>Automated proposal ID generation and secure record-keeping for all signed agreements.</li>
+            <li>Delivered full implementation training and a versioned Workflow Guide for long-term team adoption.</li>
+          </ul>
+          <div class="stack"><span class="stack-pill">Google Sheets</span><span class="stack-pill">Apps Script</span><span class="stack-pill">AppSheet</span><span class="stack-pill">DocuSign</span><span class="stack-pill">HTML/CSS/JS</span></div>
+          <span class="project-link inactive">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
+        </div>
       </div>
       <div class="project-card featured">
-        <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3><span class="badge badge-featured">Featured</span></div>
-        <p>Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
-        <div class="stack"><span class="stack-pill">Next.js</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Tailwind CSS</span><span class="stack-pill">Supabase</span><span class="stack-pill">Role-based access</span></div>
-        <a href="#" class="project-link">View case study</a>
+        <div class="project-image">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+              <div class="browser-url">amysrs.app/admin/dashboard</div>
+            </div>
+            <img src="field-ops-dashboard.png" alt="Amy's Roofing &amp; Solar Field Operations admin dashboard">
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3><span class="badge badge-featured">Featured</span></div>
+          <p>Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
+          <div class="stack"><span class="stack-pill">Next.js</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Tailwind CSS</span><span class="stack-pill">Supabase</span><span class="stack-pill">Role-based access</span></div>
+          <span class="project-link inactive">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
+        </div>
       </div>
       <div class="project-card">
-        <div class="project-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge badge-training">Training</span></div>
-        <p>Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA. Practical curriculum focused on applying AI tools to real operational workflows &mdash; from proposal generation to project management.</p>
-        <div class="stack"><span class="stack-pill">AI Tools</span><span class="stack-pill">Workflow Automation</span><span class="stack-pill">Solar Industry</span><span class="stack-pill">Team Training</span></div>
-        <blockquote class="testimonial"><p>&ldquo;Thank you for the awesome AI training session. Everyone truly appreciated the course. It opened up enormous possibilities for everyone. I can already see the fruits of the learnings.&rdquo;</p><cite>&mdash; Phil Alwitt, CEO, SolarCraft</cite></blockquote>
-        
-        <span class="project-link inactive">Novato, CA &nbsp;&middot;&nbsp; 2026</span>
+        <div class="project-image contain"><img src="ai-mastery.png" alt="8 Levels of AI Mastery framework — West Product Development"></div>
+        <div class="project-content">
+          <div class="project-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge badge-training">Training</span></div>
+          <p>Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA. Practical curriculum focused on applying AI tools to real operational workflows &mdash; from proposal generation to project management.</p>
+          <div class="stack"><span class="stack-pill">AI Tools</span><span class="stack-pill">Workflow Automation</span><span class="stack-pill">Solar Industry</span><span class="stack-pill">Team Training</span></div>
+          <blockquote class="testimonial"><p>&ldquo;Thank you for the awesome AI training session. Everyone truly appreciated the course. It opened up enormous possibilities for everyone. I can already see the fruits of the learnings.&rdquo;</p><cite>&mdash; Phil Alwitt, CEO, SolarCraft</cite></blockquote>
+          <span class="project-link inactive">Novato, CA &nbsp;&middot;&nbsp; 2026</span>
+        </div>
       </div>
       <div class="project-card">
-        <div class="project-top"><h3>Sonoma County Transportation Climate Authority</h3><span class="badge badge-wip">In planning</span></div>
-        <ul class="project-bullets">
-          <li>Custom data management platform for government staff with role-based permissions for climate actions, funding records, and emissions projects.</li>
-          <li>Public-facing web dashboard to display selected climate and transportation data to the community.</li>
-          <li>API integrations to transition existing Excel data and link to ICLEI ClearPath 2.0 for emissions tracking.</li>
-        </ul>
-        <div class="stack"><span class="stack-pill">Data Platform</span><span class="stack-pill">Public Dashboard</span><span class="stack-pill">API Integration</span><span class="stack-pill">ICLEI ClearPath 2.0</span><span class="stack-pill">Government</span></div>
-        <span class="project-link inactive">Sonoma County, CA &nbsp;&middot;&nbsp; In development</span>
+        <div class="project-image">
+          <div class="browser-frame">
+            <div class="browser-chrome">
+              <div class="browser-dots"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+              <div class="browser-url">sctca-tracker.org/dashboard</div>
+            </div>
+            <img src="sctca-dashboard.png" alt="Sonoma County Transportation and Climate Authorities Climate Action Tracker">
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-top"><h3>Sonoma County Transportation and Climate Authorities</h3><span class="badge badge-wip">Pilot phase</span></div>
+          <ul class="project-bullets">
+            <li>Custom data management platform for government staff with role-based permissions for climate actions, funding records, and emissions projects.</li>
+            <li>Public-facing web dashboard to display selected climate and transportation data to the community.</li>
+            <li>API integrations to transition existing Excel data and link to ICLEI ClearPath 2.0 for emissions tracking.</li>
+          </ul>
+          <div class="stack"><span class="stack-pill">Data Platform</span><span class="stack-pill">Public Dashboard</span><span class="stack-pill">API Integration</span><span class="stack-pill">ICLEI ClearPath 2.0</span><span class="stack-pill">Government</span></div>
+          <span class="project-link inactive">Sonoma County, CA &nbsp;&middot;&nbsp; 2026</span>
+        </div>
       </div>
     </div>
   </section>
