@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Card Layouts — Pick One</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f0ede8; --bg-alt: #e9e5df; --bg-card: #f7f4f0;
+      --navy: #1e2d42; --slate: #8fa8be; --text: #2a2a2a;
+      --text-mid: #4a4a4a; --text-muted: #787878; --border: #d4cfc9; --accent: #4a7fa5;
+    }
+    body { font-family: "Geist", "DM Sans", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px; }
+    .wrapper { max-width: 980px; margin: 0 auto; padding: 40px 5% 80px; }
+    h1 { font-size: 32px; font-weight: 600; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.02em; }
+    .intro { font-size: 16px; color: var(--text-mid); margin-bottom: 8px; }
+    .intro-note { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; font-style: italic; }
+    .version { margin-bottom: 48px; }
+    .version-label { font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .version-title { font-family: "Geist", sans-serif; font-size: 24px; font-weight: 600; color: var(--navy); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .version-desc { font-size: 15px; color: var(--text-mid); margin-bottom: 18px; max-width: 760px; }
+
+    /* Placeholder image styling (diagonal stripes) */
+    .ph {
+      background: repeating-linear-gradient(45deg, #e9e5df, #e9e5df 10px, #f0ede8 10px, #f0ede8 20px);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; text-align: center; padding: 0 16px;
+    }
+
+    /* Card base (shared) */
+    .card { background: var(--bg-card); border: 1.5px solid var(--accent); border-radius: 12px; overflow: hidden; max-width: 540px; }
+    .card-body { padding: 14px; display: flex; flex-direction: column; }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+    .card h3 { font-size: 18px; font-weight: 500; color: var(--navy); line-height: 1.4; }
+    .badge { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; background: var(--navy); color: var(--slate); }
+    .card-desc { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+    .stack { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+    .pill { font-size: 12px; color: #3a5a6e; background: #e4eef5; padding: 3px 9px; border-radius: 10px; }
+    .loc { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+
+    /* ============ V1: Top banner (16:9) ============ */
+    .v1 .ph { aspect-ratio: 16 / 9; border-bottom: 1px solid var(--border); }
+
+    /* ============ V2: Side-by-side (image left) ============ */
+    .v2 { display: flex; max-width: 720px; }
+    .v2 .ph { width: 42%; flex-shrink: 0; min-height: 100%; }
+    .v2 .card-body { flex: 1; padding: 16px 18px; }
+
+    /* ============ V3: Browser chrome frame ============ */
+    .v3-frame { margin: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 28px rgba(30,45,66,0.18), 0 2px 6px rgba(30,45,66,0.08); border: 1px solid #cdc8c2; }
+    .v3-chrome { background: linear-gradient(180deg, #e8e4de, #ddd8d1); padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #c8c2bb; }
+    .v3-dots { display: flex; gap: 5px; }
+    .v3-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .v3-dot.r { background: #ff5f56; }
+    .v3-dot.y { background: #ffbd2e; }
+    .v3-dot.g { background: #27c93f; }
+    .v3-url { flex: 1; background: #fff; border-radius: 4px; padding: 4px 10px; font-size: 11px; color: var(--text-muted); text-align: center; font-family: "Geist Mono", monospace; }
+    .v3 .ph { aspect-ratio: 16 / 9; }
+    .v3 .card-body { padding-top: 0; }
+
+    /* ============ V4: Full-bleed background with overlay ============ */
+    .v4 { position: relative; min-height: 360px; }
+    .v4 .ph { position: absolute; inset: 0; aspect-ratio: auto; z-index: 0; }
+    .v4 .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,45,66,0.05) 0%, rgba(30,45,66,0.55) 55%, rgba(30,45,66,0.92) 100%); z-index: 1; }
+    .v4 .card-body { position: relative; z-index: 2; height: 360px; justify-content: flex-end; }
+    .v4 h3 { color: #f5f3ef; }
+    .v4 .card-desc { color: rgba(245,243,239,0.85); }
+    .v4 .badge { background: rgba(255,255,255,0.15); color: #f5f3ef; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .v4 .pill { background: rgba(255,255,255,0.12); color: rgba(245,243,239,0.9); }
+    .v4 .loc { color: rgba(245,243,239,0.7); }
+
+    .pros-cons { font-size: 13px; color: var(--text-mid); margin-top: 14px; padding-left: 14px; border-left: 2px solid var(--slate); max-width: 720px; }
+    .pros-cons strong { color: var(--navy); }
+
+    .footer-note { margin-top: 56px; padding: 20px; background: var(--bg-alt); border-radius: 8px; font-size: 14px; color: var(--text-mid); max-width: 760px; }
+    .footer-note strong { color: var(--navy); }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <h1>Project Card Layouts &mdash; Pick One</h1>
+  <p class="intro">Same card (Amy&rsquo;s Field Operations Portal) rendered four different ways. The striped boxes are where a real screenshot would go.</p>
+  <p class="intro-note">Note: the AI Mastery infographic card will always use Version 1 (top banner with object-fit: contain) since it&rsquo;s not a browser screenshot. Your pick here applies to the three web-app cards.</p>
+
+  <!-- ============ VERSION 1 ============ -->
+  <div class="version">
+    <p class="version-label">Version 1</p>
+    <h2 class="version-title">Top banner (16:9 image at the top)</h2>
+    <p class="version-desc">Image runs edge-to-edge across the top of the card. Conservative, magazine-style. Used by Stripe and most SaaS marketing pages.</p>
+
+    <div class="card v1">
+      <div class="ph" style="aspect-ratio: 16/9;">[ Dashboard screenshot &mdash; 16:9 ]</div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3>
+          <span class="badge">Featured</span>
+        </div>
+        <p class="card-desc">Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
+        <div class="stack">
+          <span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind CSS</span><span class="pill">Supabase</span><span class="pill">Role-based access</span>
+        </div>
+        <span class="loc">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
+      </div>
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Safest, most professional. Image always visible. Slightly increases card height (~30%).</div>
+  </div>
+
+  <!-- ============ VERSION 2 ============ -->
+  <div class="version">
+    <p class="version-label">Version 2</p>
+    <h2 class="version-title">Side-by-side (image left, text right)</h2>
+    <p class="version-desc">Card becomes horizontal. Image fills the left ~40%, all text on the right. Reads like a magazine feature spread.</p>
+
+    <div class="card v2">
+      <div class="ph">[ Dashboard ]</div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3>
+          <span class="badge">Featured</span>
+        </div>
+        <p class="card-desc">Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
+        <div class="stack">
+          <span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind CSS</span><span class="pill">Supabase</span><span class="pill">Role-based access</span>
+        </div>
+        <span class="loc">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
+      </div>
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Cards no longer fit two-per-row on desktop &mdash; the projects section becomes a single column. Each card gets more room but the page gets longer.</div>
+  </div>
+
+  <!-- ============ VERSION 3 ============ -->
+  <div class="version">
+    <p class="version-label">Version 3</p>
+    <h2 class="version-title">Inside a browser chrome frame</h2>
+    <p class="version-desc">Image displayed inside a faux Chrome/Safari window with traffic-light dots and URL bar. Drop shadow gives a "real product shot" feel. Linear and Vercel use this style heavily.</p>
+
+    <div class="card v3">
+      <div class="v3-frame">
+        <div class="v3-chrome">
+          <div class="v3-dots">
+            <span class="v3-dot r"></span><span class="v3-dot y"></span><span class="v3-dot g"></span>
+          </div>
+          <div class="v3-url">amysrs.app/admin/dashboard</div>
+        </div>
+        <div class="ph" style="aspect-ratio: 16/9;">[ Dashboard screenshot ]</div>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3>
+          <span class="badge">Featured</span>
+        </div>
+        <p class="card-desc">Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
+        <div class="stack">
+          <span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind CSS</span><span class="pill">Supabase</span><span class="pill">Role-based access</span>
+        </div>
+        <span class="loc">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
+      </div>
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Most polished &mdash; feels like a real product marketing site. Drawback: the AI Mastery infographic card would feel inconsistent (it&rsquo;s not a browser screenshot, so it skips the frame).</div>
+  </div>
+
+  <!-- ============ VERSION 4 ============ -->
+  <div class="version">
+    <p class="version-label">Version 4</p>
+    <h2 class="version-title">Full-bleed background with text overlay</h2>
+    <p class="version-desc">Image fills the entire card. Text overlays the bottom half with a dark gradient for readability. Most magazine/editorial of the four. High visual impact, less info density.</p>
+
+    <div class="card v4">
+      <div class="ph">[ Image fills the entire card ]</div>
+      <div class="overlay"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3>
+          <span class="badge">Featured</span>
+        </div>
+        <p class="card-desc">Full-stack field operations web app with real-time admin command center, mobile photo documentation, and role-based access control.</p>
+        <div class="stack">
+          <span class="pill">Next.js</span><span class="pill">Supabase</span><span class="pill">RBAC</span>
+        </div>
+        <span class="loc">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
+      </div>
+    </div>
+
+    <div class="pros-cons"><strong>Tradeoff:</strong> Most striking visually, but forces text to be much shorter (no room for bullet lists or long descriptions). Best if you want the site to feel boldly visual.</div>
+  </div>
+
+  <div class="footer-note">
+    <strong>To apply your pick:</strong> just tell me "Version 1" (or 2, 3, 4) and I&rsquo;ll roll it into the real project cards on the live site &mdash; along with the &ldquo;Sonoma County Transportation and Climate Authorities&rdquo; name fix and the &ldquo;Pilot phase&rdquo; status update.
+    <br><br>
+    <strong>Real images:</strong> once a layout is locked in, drop the screenshots into the repo as <code>field-ops-dashboard.png</code>, <code>proposal-ecosystem.png</code>, <code>sctca-dashboard.png</code>, and <code>ai-mastery.png</code> (this is the 8 Levels of AI Mastery infographic you just shared).
+  </div>
+
+</div>
+</body>
+</html>
