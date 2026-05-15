@@ -133,12 +133,16 @@
     .team-skill { font-size: 14px; color: #3a5a6e; background: #e4eef5; padding: 3px 9px; border-radius: 10px; }
     .team-skill.alt { color: #3a4e3a; background: #e4f0e4; }
 
-    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
-    .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; transition: border-color 0.2s; }
-    .service-card:hover { border-color: var(--slate); }
-    .service-num { font-family: "Geist", sans-serif; font-size: 24px; font-weight: 300; color: var(--border); margin-bottom: 6px; letter-spacing: -0.01em; }
-    .service-card h3 { font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
-    .service-card p { font-size: 16px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+    .offer-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; transition: border-color 0.2s; display: flex; flex-direction: column; }
+    .offer-card:hover { border-color: var(--slate); }
+    .offer-card.featured { border-color: var(--accent); border-width: 1.5px; }
+    .offer-timing { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .offer-title { font-family: "Geist", sans-serif; font-size: 21px; font-weight: 600; color: var(--navy); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .offer-desc { font-size: 15px; font-weight: 300; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+    .offer-button { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: var(--accent); color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; border-radius: 8px; transition: background 0.2s; align-self: flex-start; }
+    .offer-button:hover { background: var(--navy); }
+    .offers-secondary { margin-top: 18px; text-align: center; font-size: 14px; color: var(--text-muted); font-style: italic; }
 
     .projects-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
     .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 0; display: flex; transition: border-color 0.2s; overflow: hidden; }
@@ -240,8 +244,8 @@
       .team-name { font-size: 22px; }
       .team-bio { font-size: 15px; }
       .team-card { padding: 12px; }
-      .service-card h3 { font-size: 16px; }
-      .service-card p { font-size: 14px; }
+      .offer-title { font-size: 18px; }
+      .offer-desc { font-size: 14px; }
       .project-card h3 { font-size: 16px; }
       .project-card p { font-size: 14px; }
       .project-bullets li { font-size: 14px; }
@@ -286,7 +290,7 @@
   <section id="about">
     <p class="section-eyebrow">About</p>
     <h2 class="section-title">Who we are</h2>
-    <p class="mission-text">West Product Development brings together deep mechanical engineering expertise and modern software architecture &mdash; auditing legacy workflows and implementing AI-driven tools to accelerate the product development lifecycle. We focus on <strong>renewable energy, solar, and climate-sector businesses</strong>, where outdated spreadsheets and paper-based processes slow down teams doing work that matters.</p>
+    <p class="mission-text">West Product Development brings together deep mechanical engineering expertise and modern software architecture &mdash; auditing legacy workflows and implementing AI-driven tools to accelerate the product development lifecycle. We focus on <strong>renewable energy, solar, and climate-sector businesses</strong>, where outdated spreadsheets and paper-based processes slow down teams doing work that matters. Where systems already exist, we add AI and automation on top &mdash; no rebuild required.</p>
     <div class="team-grid">
 
       <div class="team-card">
@@ -336,13 +340,24 @@
     <p class="section-eyebrow">Services</p>
     <h2 class="section-title">How we can help</h2>
     <div class="services-grid">
-      <div class="service-card"><div class="service-num">01</div><h3>AI-driven workflow automation</h3><p>Replace manual, error-prone processes with automated pipelines using Google Workspace, Apps Script, and AI tools tailored to your operation.</p></div>
-      <div class="service-card"><div class="service-num">02</div><h3>Product lifecycle modernization</h3><p>Audit legacy PLM workflows and implement AI-driven tools that accelerate how hardware products move from concept to production.</p></div>
-      <div class="service-card"><div class="service-num">03</div><h3>Custom web applications</h3><p>Customer-facing portals and internal tools built to replace brittle spreadsheet-based systems &mdash; architected for scale and built to last.</p></div>
-      <div class="service-card"><div class="service-num">04</div><h3>Cloud infrastructure &amp; DevOps</h3><p>Scalable AWS infrastructure, serverless architecture, and CI/CD pipelines designed for resilient, efficient delivery.</p></div>
-      <div class="service-card"><div class="service-num">05</div><h3>Digital transformation consulting</h3><p>Strategic roadmapping for businesses ready to move from paper, PDFs, and legacy spreadsheets to modern, connected digital workflows.</p></div>
-      <div class="service-card"><div class="service-num">06</div><h3>AI training &amp; team enablement</h3><p>Hands-on workshops that equip engineering and operations teams with practical AI skills they can apply to their work immediately.</p></div>
+      <div class="offer-card featured">
+        <p class="offer-timing">Start here &middot; 1&ndash;2 weeks</p>
+        <h3 class="offer-title">Discovery Audit</h3>
+        <p class="offer-desc">A written review of your current systems &mdash; where AI can save the most time, what&rsquo;s worth modernizing, and a clear path forward. You own the deliverable.</p>
+        <a href="mailto:westproductdev@gmail.com?subject=Discovery%20Audit" class="offer-button">Email to start &rarr;</a>
+      </div>
+      <div class="offer-card">
+        <p class="offer-timing">A few weeks</p>
+        <h3 class="offer-title">Quick Win Workflow Build</h3>
+        <p class="offer-desc">One specific workflow &mdash; proposals, intake, ordering, scheduling, reporting &mdash; replaced with a focused custom tool your team uses daily.</p>
+      </div>
+      <div class="offer-card">
+        <p class="offer-timing">1&ndash;2 months, in phases</p>
+        <h3 class="offer-title">Operations Platform Build</h3>
+        <p class="offer-desc">Full-stack web application replacing legacy spreadsheets across your business. Custom database, role-based access, mobile-friendly.</p>
+      </div>
     </div>
+    <p class="offers-secondary">Also available: ongoing maintenance, solar industry portals, AI training workshops.</p>
   </section>
 
   <section id="projects">
@@ -382,7 +397,7 @@
           <div class="project-top"><h3>Amy&rsquo;s Roofing &amp; Solar &mdash; Field Operations Portal</h3><span class="badge badge-featured">Featured</span></div>
           <p>Full-stack field operations web app supporting site survey, job checkout, quality check, and task workflows. Mobile photo documentation for field crews and a real-time admin command center with role-based access control and live job status updates.</p>
           <p class="project-result">Built end-to-end &mdash; mobile photo capture for crews, real-time admin dashboard, role-based access, multi-stage job pipeline. Ready for client rollout.</p>
-          <div class="stack"><span class="stack-pill">Next.js</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Tailwind CSS</span><span class="stack-pill">Supabase</span><span class="stack-pill">Role-based access</span></div>
+          <div class="stack"><span class="stack-pill">Next.js</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Tailwind CSS</span><span class="stack-pill">Supabase</span><span class="stack-pill">Vercel</span><span class="stack-pill">Role-based access</span></div>
           <span class="project-link inactive">Petaluma, CA &nbsp;&middot;&nbsp; 2026</span>
         </div>
       </div>
