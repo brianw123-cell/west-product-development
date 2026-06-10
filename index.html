@@ -73,6 +73,7 @@
       animation: heroFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
       animation-delay: 0.2s;
     }
+    .hero h1 .llc-suffix { font-size: 0.6em; font-weight: 500; letter-spacing: 0; }
     .hero-sub {
       font-size: clamp(17px, 1.8vw, 21px); font-weight: 300;
       color: rgba(245,243,239,0.78); line-height: 1.45;
@@ -106,7 +107,7 @@
       animation-delay: 0.45s;
     }
     .hero-logo img {
-      height: 219px; width: auto; max-width: 100%; display: block;
+      max-height: 219px; height: auto; width: auto; max-width: 100%; display: block;
       opacity: 0.9;
     }
     .hero-divider {
@@ -214,7 +215,7 @@
 
     @media (max-width: 1100px) {
       .hero-inner { gap: 32px; }
-      .hero-logo img { height: 235px; }
+      .hero-logo img { max-height: 235px; height: auto; }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 900px) {
@@ -222,7 +223,7 @@
       #contact { flex-direction: column; align-items: flex-start; gap: 12px; }
       .contact-grid { justify-content: flex-start; }
       .hero-inner { flex-direction: column; align-items: flex-start; gap: 32px; margin-top: 28px; }
-      .hero-logo img { height: 219px; }
+      .hero-logo img { max-height: 219px; height: auto; }
       .team-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
@@ -236,7 +237,7 @@
       .hero { padding: 24px 5% 40px; }
       .hero-inner { gap: 24px; margin-top: 20px; }
       .hero h1 { font-size: clamp(28px, 8vw, 40px); margin-bottom: 20px; }
-      .hero-logo img { height: 173px; }
+      .hero-logo img { max-height: 173px; height: auto; }
       .hero-nav { display: none; }
       .hero-eyebrow { font-size: 11px; margin-bottom: 16px; }
       .hero-tag { font-size: 12px; padding: 6px 14px; }
@@ -286,7 +287,7 @@
     <div class="hero-inner">
       <div class="hero-left">
         <p class="hero-eyebrow">Engineering &nbsp;&middot;&nbsp; AI Automation &nbsp;&middot;&nbsp; Systems Architecture</p>
-        <h1>West Product<br>Development LLC</h1>
+        <h1>West Product<br>Development <span class="llc-suffix">LLC</span></h1>
         <p class="hero-sub">AI-built software development &mdash; real working tools in weeks, not months.</p>
         <div class="hero-tags">
           <span class="hero-tag">AI Automation</span>
