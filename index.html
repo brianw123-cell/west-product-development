@@ -168,6 +168,10 @@
     .project-bullets li::before { content: "\2013"; position: absolute; left: 0; color: var(--slate); }
     .project-result { font-size: 14px; font-weight: 500; color: var(--navy); margin: 0 0 12px; padding-left: 12px; border-left: 2px solid var(--slate); line-height: 1.5; }
     .stack { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    /* The testimonial now sits above the stack pills, so it needs its own
+       breathing room underneath. Without this the attribution line crowds
+       straight into the pills. */
+    .testimonial + .stack { margin-top: 14px; }
     .stack-pill { font-size: 14px; color: #3a5a6e; background: #e4eef5; padding: 3px 9px; border-radius: 10px; }
     .project-link { font-size: 16px; font-weight: 500; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; }
     .project-link::after { content: " \2192"; margin-left: 3px; }
@@ -492,8 +496,8 @@
         <div class="project-content">
           <div class="project-top"><h3>AI Automation Workshop &mdash; Solar Industry</h3><span class="badge badge-training">Training</span></div>
           <p>Hands-on AI automation training delivered to a 10-person team at a solar company in Novato, CA. Practical curriculum focused on applying AI tools to real operational workflows &mdash; from proposal generation to project management.</p>
-          <div class="stack"><span class="stack-pill">AI Tools</span><span class="stack-pill">Workflow Automation</span><span class="stack-pill">Solar Industry</span><span class="stack-pill">Team Training</span></div>
           <blockquote class="testimonial"><p>&ldquo;Thank you for the awesome AI training session. Everyone truly appreciated the course. It opened up enormous possibilities for everyone. I can already see the fruits of the learnings.&rdquo;</p><cite>&mdash; Phil Alwitt, CEO, SolarCraft</cite></blockquote>
+          <div class="stack"><span class="stack-pill">AI Tools</span><span class="stack-pill">Workflow Automation</span><span class="stack-pill">Solar Industry</span><span class="stack-pill">Team Training</span></div>
           <span class="project-link inactive">Novato, CA &nbsp;&middot;&nbsp; 2026</span>
         </div>
       </div>
@@ -506,10 +510,10 @@
       <h2 class="section-title">Get in touch</h2>
     </div>
     <div class="contact-grid">
-      <div class="contact-card">
+      <a href="mailto:westproductdev@gmail.com" class="contact-card">
         <div class="contact-icon"><svg class="si" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div><div class="contact-label">Email</div><div class="contact-val">westproductdev@gmail.com</div></div>
-      </div>
+      </a>
       <a href="https://www.linkedin.com/in/westproductdev" target="_blank" rel="noopener" class="contact-card">
         <div class="contact-icon"><svg class="fi" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452H16.89v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a1.98 1.98 0 0 1-1.98-1.98 1.98 1.98 0 0 1 1.98-1.98 1.98 1.98 0 0 1 1.98 1.98 1.98 1.98 0 0 1-1.98 1.98zm1.957 13.019H3.379V9h3.915v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
         <div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/westproductdev</div></div>
