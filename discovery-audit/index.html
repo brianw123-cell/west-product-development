@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="What a West Product Development discovery audit produces: interviews across every department, a full software and handoff map, scoped and priced projects, and a written deliverable set you own.">
+  <meta name="theme-color" content="#1e2d42">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <title>What a Discovery Audit Produces &middot; West Product Development</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f0ede8; --bg-alt: #e9e5df; --bg-card: #f7f4f0;
+      --navy: #1e2d42; --slate: #8fa8be; --text: #2a2a2a;
+      --text-mid: #4a4a4a; --text-muted: #5a5a5a; --border: #d4cfc9; --accent: #2e5d85;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: "Geist", "DM Sans", sans-serif; background: var(--bg); color: var(--text);
+      line-height: 1.6; font-size: 21px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    .topbar { background: var(--navy); padding: 18px 0; }
+    .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex;
+      justify-content: space-between; align-items: center; gap: 20px; }
+    .topbar-brand { font-size: 17px; font-weight: 600; color: #fff; text-decoration: none; letter-spacing: -0.01em; }
+    .topbar-back { font-size: 15px; color: var(--slate); text-decoration: none; }
+    .topbar-back:hover { color: #fff; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .hero-block { padding: 68px 0 40px; }
+    .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+    h1 { font-size: 52px; line-height: 1.08; letter-spacing: -0.028em; color: var(--navy);
+      font-weight: 600; margin-bottom: 20px; }
+    .lede { font-size: 23px; line-height: 1.5; color: var(--text-mid); max-width: 720px; }
+
+    .note { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+      border-radius: 8px; padding: 18px 22px; font-size: 17px; color: var(--text-mid);
+      margin: 34px 0 0; max-width: 820px; }
+    .note strong { color: var(--navy); }
+
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 44px 0 0; }
+    .stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 24px 16px; text-align: center; }
+    .stat b { display: block; font-size: 42px; line-height: 1; letter-spacing: -0.03em;
+      color: var(--navy); font-weight: 600; }
+    .stat span { display: block; font-size: 14px; line-height: 1.35; color: var(--text-muted); margin-top: 10px; }
+
+    section { padding: 56px 0 0; }
+    .section-eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted); font-weight: 600; margin-bottom: 10px; }
+    .section-title { font-size: 34px; line-height: 1.15; letter-spacing: -0.022em;
+      color: var(--navy); font-weight: 600; margin-bottom: 28px; }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 26px 24px; }
+    .step-n { width: 32px; height: 32px; border-radius: 50%; background: var(--navy); color: #fff;
+      font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .step h3 { font-size: 21px; line-height: 1.25; letter-spacing: -0.015em; color: var(--navy);
+      font-weight: 600; margin-bottom: 8px; }
+    .step p { font-size: 17px; line-height: 1.55; color: var(--text-mid); }
+
+    .docs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .doc { background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--slate);
+      border-radius: 8px; padding: 16px 20px; }
+    .doc b { display: block; font-size: 18px; font-weight: 600; color: var(--navy); letter-spacing: -0.01em; }
+    .doc span { display: block; font-size: 16px; line-height: 1.45; color: var(--text-muted); margin-top: 3px; }
+
+    .finds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .find { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+    .tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); background: #e3ebf2;
+      padding: 4px 11px; border-radius: 20px; margin-bottom: 12px; }
+    .find p { font-size: 17px; line-height: 1.55; color: var(--text-mid); }
+    .find p strong { color: var(--navy); font-weight: 600; }
+
+    .cta { margin: 60px 0 0; background: var(--navy); border-radius: 12px; padding: 44px 40px; }
+    .cta h2 { font-size: 30px; line-height: 1.2; letter-spacing: -0.022em; color: #fff;
+      font-weight: 600; margin-bottom: 12px; }
+    .cta p { font-size: 19px; line-height: 1.55; color: var(--slate); max-width: 640px; margin-bottom: 22px; }
+    .cta-links { display: flex; flex-wrap: wrap; gap: 26px; align-items: center; }
+    .cta-links a { font-size: 17px; font-weight: 500; color: #fff; text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 2px; }
+    .cta-links a:hover { border-bottom-color: #fff; }
+
+    footer { background: var(--navy); margin-top: 70px; padding: 34px 0; }
+    .footer-inner { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex;
+      justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-brand { font-size: 17px; font-weight: 600; color: var(--slate); letter-spacing: -0.01em; }
+    .footer-links { display: flex; gap: 14px; font-size: 13px; }
+    .footer-links a { color: var(--slate); text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 14px; color: var(--slate); }
+
+    @media (max-width: 900px) {
+      body { font-size: 19px; }
+      .wrap, .topbar-inner, .footer-inner { padding-left: 22px; padding-right: 22px; }
+      h1 { font-size: 36px; }
+      .lede { font-size: 20px; }
+      .section-title { font-size: 28px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .steps, .docs, .finds { grid-template-columns: 1fr; }
+      .cta { padding: 32px 26px; }
+      .hero-block { padding: 44px 0 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-brand" href="/">West Product Development</a>
+    <a class="topbar-back" href="/#services">&larr; All services</a>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="hero-block">
+    <p class="eyebrow">Discovery Audit &middot; Start here &middot; 1&ndash;2 weeks</p>
+    <h1>What a discovery audit produces</h1>
+    <p class="lede">Before anyone writes code, somebody has to walk the whole company and find where the
+      time actually goes. This is the shape of that work, taken from a real engagement with a solar
+      installer and stripped of anything identifying.</p>
+
+    <div class="note">
+      <strong>Anonymized sample.</strong> The company name, the people, the dollar figures, and the
+      specific findings have been removed or generalized. What&rsquo;s shown is the method and the
+      deliverable set.
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>16</b><span>people interviewed</span></div>
+      <div class="stat"><b>14</b><span>interview sessions</span></div>
+      <div class="stat"><b>9</b><span>departments covered</span></div>
+      <div class="stat"><b>41</b><span>projects scoped &amp; priced</span></div>
+      <div class="stat"><b>13</b><span>written deliverables</span></div>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-eyebrow">Method</p>
+    <h2 class="section-title">How it runs</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <h3>Interview everyone</h3>
+        <p>CEO down to the coordinators. Sales, design, project management, construction, service,
+          procurement, finance, admin, IT. Each person walks through their actual day and names what
+          slows them down.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <h3>Map the stack and the handoffs</h3>
+        <p>Every tool in use, what it costs, who touches it, and what happens in the gaps between
+          departments. The breakages are almost never inside a department. They&rsquo;re at the seams.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <h3>Rank it, then build</h3>
+        <p>Each fix gets scoped, priced, and sorted by whether it grows revenue or cuts cost. Then the
+          build starts, connecting what already exists or writing new software where nothing fits.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-eyebrow">Deliverables</p>
+    <h2 class="section-title">What gets handed over</h2>
+    <div class="docs">
+      <div class="doc"><b>Cross-Interview Synthesis</b><span>Every theme that came up more than once, with who said it</span></div>
+      <div class="doc"><b>How We&rsquo;d Actually Build This</b><span>Architecture and approach for each project</span></div>
+      <div class="doc"><b>Three Ways to Build It</b><span>Custom software vs connecting what you already own</span></div>
+      <div class="doc"><b>Should You Replace Any of Your Software?</b><span>Tool-by-tool verdict with real costs</span></div>
+      <div class="doc"><b>Quick Operational Wins</b><span>Fixes that need no software at all</span></div>
+      <div class="doc"><b>Where the Value Is, Ranked</b><span>Revenue growth vs cost savings, side by side</span></div>
+      <div class="doc"><b>Measuring the Impact</b><span>Baselines to judge the work against later</span></div>
+      <div class="doc"><b>What Each Person Would Want Built</b><span>A menu, separate from the priorities</span></div>
+      <div class="doc"><b>AI Safety &amp; Data Governance</b><span>Working draft for your internal committee</span></div>
+      <div class="doc"><b>Safe Ways to Use AI</b><span>Plain-language guardrails and a pre-flight check</span></div>
+      <div class="doc"><b>Twice the Work, Same Team</b><span>What this actually changes for the people here</span></div>
+      <div class="doc"><b>Board-ready deck</b><span>The whole audit in 14 slides</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-eyebrow">Findings</p>
+    <h2 class="section-title">The kind of thing it turns up</h2>
+    <div class="finds">
+      <div class="find">
+        <span class="tag">Paying twice</span>
+        <p>A capacity planning tool <strong>already included</strong> in a subscription they were paying
+          for, unused, while the same job was being done by hand in a spreadsheet.</p>
+      </div>
+      <div class="find">
+        <span class="tag">Orphaned handoff</span>
+        <p>The handoff from construction to service had <strong>no owner</strong>. Everyone assumed the
+          other department picked it up.</p>
+      </div>
+      <div class="find">
+        <span class="tag">Re-entry</span>
+        <p>The same job data typed into <strong>three systems</strong> by three different people, because
+          none of the systems talk to each other.</p>
+      </div>
+      <div class="find">
+        <span class="tag">Overlap</span>
+        <p>Two paid tools doing <strong>substantially the same job</strong>, kept because different
+          departments adopted them separately and nobody compared them.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Curious what yours would turn up?</h2>
+    <p>An audit runs one to two weeks and ends with a written deliverable set you own, whether or not
+      you build anything with us afterward.</p>
+    <div class="cta-links">
+      <a href="mailto:westproductdev@gmail.com">westproductdev@gmail.com</a>
+      <a href="https://dashboard-demo.westproductdev.com" target="_blank" rel="noopener">See what we built from one &rarr;</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">West Product Development LLC</span>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html#do-not-sell">Do Not Sell or Share</a>
+    </div>
+    <span class="footer-copy">&copy; 2026 West Product Development LLC &nbsp;&middot;&nbsp; Larkspur, CA</span>
+  </div>
+</footer>
+
+</body>
+</html>
